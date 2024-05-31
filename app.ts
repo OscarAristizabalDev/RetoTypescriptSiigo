@@ -17,7 +17,7 @@ export const getCharactersByNumber = async () => {
 }
 
 const setCharacters = (characters: Character[]) => {
-    localStorage.setItem(localStorageEnum.key, JSON.stringify(characters))
+    localStorage.setItem(localStorageEnum.key, JSON.stringify(characters));
 }
 
 const displayCharacters = (characters: Character[]) => {
