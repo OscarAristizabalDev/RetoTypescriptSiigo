@@ -1,3 +1,3 @@
 # RUN THE NEXT COMMAND
-npm install
+npm install \
 npx webpack
