@@ -39,20 +39,70 @@ const displayCharacters = (characters: Character[]) => {
 
 export const showCharacters = () => {
   
-        if (localStorage.getItem(localStorageEnum.key)) {        
-          arrCaracteres=JSON.parse(localStorage.getItem(localStorageEnum.key)!)    
-                
-          if (arrCaracteres.length>0)      
-          {                    
-             arrCaracteres.forEach(element => {
+    if (localStorage.getItem(localStorageEnum.key)) {        
+        arrCaracteres = JSON.parse(localStorage.getItem(localStorageEnum.key)!);
+            
+        if (arrCaracteres.length>0){
+            let divLista: HTMLDivElement = document.getElementById('lista') as HTMLDivElement;
+            let datos: string = '';
+
+            console.table(arrCaracteres);
+            
+            arrCaracteres.forEach(element => {
                 console.log(element);
-                document.getElementById('lista')!.innerHTML= document.getElementById('lista')!.innerHTML + element.id + '   ' 
-                 + element.name + '   ' +  element.status + '   ' + element.species + '   ' + element.type + '<br>';
-    
-    
-             });
-          
-          }
-        
-        }     
+                datos = datos + element.id + '  ' 
+                            + element.name + '  ' +  element.status + '  ' + element.species + '  ' + element.type + '<br>';
+            });
+
+            divLista.innerHTML = datos;
+        }
     }
+}
+
+const form: HTMLFormElement = document.getElementById('nuevoPersonaje') as HTMLFormElement;
+form.addEventListener('submit', (event: SubmitEvent) => {
+    event.preventDefault();
+
+    saveCharacter();
+});
+
+export const saveCharacter = (): void => {
+    const formData: FormData = new FormData(form);
+    
+    const id: string = formData.get('id')!.toString();
+    const name: string = formData.get('name')!.toString();
+    const estatus: string = formData.get('status')!.toString();
+    const species: string = formData.get('species')!.toString();
+    const type: string = formData.get('type')!.toString();
+    const gender: string = formData.get('gender')!.toString();
+
+    const newCharacter: Character = {
+        id: Number(id),
+        name: name,
+        status: estatus,
+        species: species,
+        type: type,
+        gender: gender,
+        origin: {name: '', url: ''},
+        location: {name: '', url: ''},
+        image: `https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`,
+        episode: ['https://rickandmortyapi.com/api/episode/1'],
+        url: `https://rickandmortyapi.com/api/character/${id}`,
+        created: new Date(),
+    };
+
+    const savedCharacters : (string | null) = localStorage.getItem(localStorageEnum.key);
+    
+    let characters: Character[] = [];
+    if (savedCharacters) {
+        characters = JSON.parse(savedCharacters);
+    }
+    characters.push(newCharacter);
+    localStorage.setItem(localStorageEnum.key, JSON.stringify(characters));
+    
+    console.log('Se agregó un nuevo personaje');
+    console.log(newCharacter);
+
+    form.reset();
+    showCharacters();
+}

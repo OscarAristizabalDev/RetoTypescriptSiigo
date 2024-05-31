@@ -5,15 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
-    <script src="dist/bundle.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
 </head>
 <body>
 
     <ul id="characters"></ul>
-    <input id="pageCharacter" type="number" placeholder="Ingrese la página a consultar" />
-    <button onclick=myLibrary.getCharactersByNumber()> Consultar personajes </button><br><br>
+    <input id="pageCharacter" type="number" placeholder="Ingrese la pagina a consultar" required min="0" step="1"/>
+    <button onclick=myLibrary.getCharactersByNumber()> Consultar personajes </button>
+    <br>
+    <h3>Agregar nuevo personaje</h3>
+    <form id="nuevoPersonaje">
+        <label for="id"><b>ID:</b></label>
+        <input type="number" id="id" name="id" min="0" step="1" required>
+        <br>
+        <br>
+        <label for="name"><b>Nombre:</b></label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <br>
+        <label><b>Estatus:</b></label>
+        <input type="radio" id="alive" name="status" value="Alive" checked>
+        <label for="alive">Vivo</label>
+        <input type="radio" id="dead" name="status" value="Dead">
+        <label for="dead">Muerto</label>
+        <input type="radio" id="unknown" name="status" value="unknown">
+        <label for="unknown">Desconocido</label>
+        <br>
+        <br>
+        <label><b>Especie:</b></label>
+        <input type="radio" id="human" name="species" value="Human" checked>
+        <label for="human">Humano</label>
+        <input type="radio" id="alien" name="species" value="Alien">
+        <label for="alien">Alien</label>
+        <br>
+        <br>
+        <label for="type"><b>Tipo:</b></label>
+        <input type="text" id="type" name="type">
+        <br>
+        <br>
+        <label><b>Género:</b></label>
+        <input type="radio" id="male" name="gender" value="Male" checked>
+        <label for="male">Masculino</label>
+        <input type="radio" id="Female" name="gender" value="Female">
+        <label for="Female">Femenino</label>
+        <input type="radio" id="unknown2" name="gender" value="unknown">
+        <label for="unknown2">Desconocido</label>
+        <br>
+        <br>
+        <button type="submit">Agregar</button>
+    </form>
+    <br><br>
+    <!--<button onclick=myLibrary.showCharacters()> Ver personajes </button><br/><br/>-->
+    <div id="lista" style="font-family: Arial, Helvetica, sans-serif; left: 200px;">
+    </div>  
         
-        <div id="lista" style="font-family: Arial, Helvetica, sans-serif; left: 200px;">
-        </div>        
+    <script src="dist/bundle.js"></script>
 </body>
 </html>
