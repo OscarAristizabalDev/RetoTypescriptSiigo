@@ -1,3 +1,4 @@
-# RUN THE NEXT COMMAND
-npm install \
-npx webpack
+> ## Este es un encabezado.
+>
+> 1.    npm install
+> 2.    npx webpack
