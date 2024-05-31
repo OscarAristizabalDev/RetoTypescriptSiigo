@@ -98,7 +98,7 @@ export const saveCharacter = (): void => {
         characters = JSON.parse(savedCharacters);
     }
     characters.push(newCharacter);
-    localStorage.setItem(localStorageEnum.key, JSON.stringify(characters));
+    setCharacters(characters);
     
     console.log('Se agregó un nuevo personaje');
     console.log(newCharacter);
